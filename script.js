@@ -13,10 +13,19 @@ var totalballs = 0;
 var totalballs2 = 0;
 var toss = 1;
 
+const strikeAudio = new Audio("http://bit.ly/so-ball-hit");
+const gameOverAudio = new Audio("http://bit.ly/so-crowd-cheer");
+
 const runs = ["W", 1, 2, 3, 4, 5, 6, 0]
 
 resetbutton.onclick = ()=>{
     window.location.reload();
+}
+
+battingbutton.onclick = () => {
+    strikeAudio.pause();
+    strikeAudio.currentTime = 0;
+    strikeAudio.play();
 }
 
 
@@ -27,7 +36,10 @@ function update(){
     wickets_team2.textContent = totalwickets_team2;
 }
 
+
+
 function gameover(){
+    gameOverAudio.play();
     if(totalscore_team1>totalscore_team2){
         alert("IND wins!")
     }
@@ -38,6 +50,9 @@ function gameover(){
         alert("There is a tie")
     }
 }
+
+
+
 
 
 
@@ -56,10 +71,11 @@ battingbutton.onclick = () =>{
 
             
         }
-        if(totalballs2 == 6 || wickets_team2 == 2 || total_scoreteam2>total_scoreteam1){
+        if(totalballs2 == 6 || totalwickets_team2 === 2 || totalscore_team2>totalscore_team1){
             toss = 3;
             gameover();
         }
+        
     }
     if(toss === 1){
         totalballs++;
@@ -73,21 +89,15 @@ battingbutton.onclick = () =>{
 
             
         }
-        if(totalballs == 6 || wickets_team1 == 2){
+        if(totalballs == 6 || totalwickets_team1 === 2){
             toss = 2;
         }
+        
     }
     update();
-   
+    
 
 
 
 
 }
-
-
-
-
-
-
-
